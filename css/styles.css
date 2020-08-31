@@ -1,3 +1,15 @@
 body {
     background-color: grey;
 }
+
+.pokemon-name {
+    background-color: darkgray;
+    color: red;
+    border: 2px solid black;
+    padding: 16px 32px;
+    display: inline-block;
+    text-align: center;
+    font-size: 20px;
+    margin: 15px;
+    cursor: pointer;
+}

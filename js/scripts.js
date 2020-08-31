@@ -12,10 +12,33 @@ var pokemonRepository = (function () {
   function add(pokemon) {
     return pokemonList.push(pokemon);
   }
+  //Function to add pokemon names
 
+  function addListItem(pokemon) {
+    var unOrderedList = document.querySelector(".pokemon-list");
+    var listItem = document.createElement("li");
+    var button = document.createElement("button");
+    button.innerText = pokemon;
+    button.classList.add("pokemon-name");
+    listItem.appendChild(button);
+    unOrderedList.appendChild(listItem);
+    eventListener(button, pokemon);
+  }
+
+  //Function to console log the name of pokemon when clicked
+  function showDetails(pokemon) {
+    console.log(pokemon);
+  }
+  //function to add eventlistener the buttons
+  function eventListener(button, pokemon) {
+    button.addEventListener("click", function () {
+      showDetails(pokemon);
+    });
+  }
   return {
     add: add,
     getAll: getAll,
+    addListItem: addListItem,
   };
 })();
 
@@ -25,29 +48,7 @@ pokemonRepository.add({
   type: ["fire", "air"],
 });
 var newRepository = pokemonRepository.getAll();
-document.write("<h1> forEach Loop</h1><br>");
-newRepository.forEach(function (list) {
-  document.write(
-    "<p>" + list.name + "  " + list.height + "   " + list.type + "<br>   </p> "
-  );
-});
 
-document.write("<br><h1> for Loop</h1><br>");
-for (var i = 0; i < newRepository.length; i++) {
-  var pokemonHeight = newRepository[i].height;
-  var pokemonName = newRepository[i].name;
-  if (pokemonHeight > 1.9) {
-    document.write(
-      "<h3>" +
-        pokemonName +
-        "(Height: " +
-        pokemonHeight +
-        ")   " +
-        " - Wow this is big<br></h3>"
-    );
-  } else {
-    document.write(
-      "<h3>" + pokemonName + "(Height: " + pokemonHeight + ")<br>   </h3> "
-    );
-  }
-}
+newRepository.forEach(function (list) {
+  pokemonRepository.addListItem(list.name);
+});
